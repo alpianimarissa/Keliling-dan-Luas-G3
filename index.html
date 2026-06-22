@@ -1,0 +1,1573 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Misi Arsitek Lapangan Bola - Keliling vs Luas</title>
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts for friendly visual design -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Fredoka', 'Nunito', sans-serif;
+            background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+        }
+        .step-transition {
+            transition: all 0.4s ease-in-out;
+        }
+        @keyframes bounce-ball {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-12px) scale(0.9); }
+        }
+        .bouncing-ball {
+            animation: bounce-ball 2s ease-in-out infinite;
+        }
+        @keyframes run-border {
+            0% { border-color: #ffffff; }
+            50% { border-color: #facc15; }
+            100% { border-color: #ffffff; }
+        }
+        .running-border {
+            animation: run-border 1.5s infinite;
+        }
+        .custom-scroll::-webkit-scrollbar {
+            height: 6px;
+        }
+        .custom-scroll::-webkit-scrollbar-track {
+            background: #f1f5f9;
+            border-radius: 999px;
+        }
+        .custom-scroll::-webkit-scrollbar-thumb {
+            background: #10b981;
+            border-radius: 999px;
+        }
+        /* Grass pattern overlay */
+        .grass-bg {
+            background-color: #15803d;
+            background-image: repeating-linear-gradient(90deg, #166534 0px, #166534 30px, #15803d 30px, #15803d 60px);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center justify-between p-3 md:p-6 selection:bg-emerald-200">
+
+    <!-- HEADER & STATUS BAR -->
+    <header class="w-full max-w-4xl bg-white/95 backdrop-blur-md rounded-3xl p-4 shadow-xl border-4 border-emerald-400 flex flex-col gap-3 mb-4">
+        <div class="flex flex-col md:flex-row justify-between items-center gap-3">
+            <div class="flex items-center gap-3">
+                <span class="text-3xl md:text-4xl bouncing-ball">⚽</span>
+                <div>
+                    <h1 class="text-xl md:text-2xl font-extrabold text-emerald-700 tracking-wide">Misi Arsitek Stadion</h1>
+                    <p class="text-xs md:text-sm text-gray-500 font-medium">Penguatan Konsep: Keliling vs Luas Lapangan Bola</p>
+                </div>
+            </div>
+            <div class="bg-yellow-100 text-yellow-800 font-bold px-4 py-2 rounded-2xl border-2 border-yellow-300 flex items-center gap-2 text-xs md:text-sm shadow-sm">
+                <span>🏆 Poin Desainer: </span><span id="header-points" class="text-emerald-600 font-extrabold text-base">100</span>
+            </div>
+        </div>
+
+        <!-- Horizontal Steps Navigation -->
+        <div class="grid grid-cols-5 gap-1.5 pt-2 border-t border-emerald-100">
+            <button onclick="changeStep(1)" id="nav-btn-1" class="flex flex-col items-center p-2 rounded-xl transition duration-300 bg-emerald-100 text-emerald-800 font-bold text-xs">
+                <span class="text-lg">🔎</span>
+                <span class="hidden md:inline">1. Bedah Beda</span>
+            </button>
+            <button onclick="changeStep(2)" id="nav-btn-2" class="flex flex-col items-center p-2 rounded-xl transition duration-300 bg-gray-50 text-gray-400 font-bold text-xs">
+                <span class="text-lg">📐</span>
+                <span class="hidden md:inline">2. Desain Lapangan</span>
+            </button>
+            <button onclick="changeStep(3)" id="nav-btn-3" class="flex flex-col items-center p-2 rounded-xl transition duration-300 bg-gray-50 text-gray-400 font-bold text-xs">
+                <span class="text-lg">🎨</span>
+                <span class="hidden md:inline">3. Gambar Grid</span>
+            </button>
+            <button onclick="changeStep(4)" id="nav-btn-4" class="flex flex-col items-center p-2 rounded-xl transition duration-300 bg-gray-50 text-gray-400 font-bold text-xs">
+                <span class="text-lg">📋</span>
+                <span class="hidden md:inline">4. Kuis Stadion</span>
+            </button>
+            <button onclick="changeStep(5)" id="nav-btn-5" class="flex flex-col items-center p-2 rounded-xl transition duration-300 bg-gray-50 text-gray-400 font-bold text-xs">
+                <span class="text-lg">🏅</span>
+                <span class="hidden md:inline">5. Lencana Emas</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT CONTAINER -->
+    <main class="w-full max-w-4xl bg-white/95 backdrop-blur-sm rounded-3xl p-4 md:p-6 shadow-2xl border-4 border-emerald-500/50 flex-grow flex flex-col justify-between min-h-[500px]">
+
+        <!-- STEP 1: INTERACTIVE INTRODUCTION & COMPARISON -->
+        <section id="step-1" class="step-transition flex flex-col gap-6">
+            <div class="text-center">
+                <span class="text-sm uppercase font-extrabold text-emerald-600 tracking-wider">Misi 1: Mengenali Area</span>
+                <h2 class="text-2xl font-black text-slate-800">Bedah Rahasia Stadion: Keliling vs Luas</h2>
+                <p class="text-gray-600 max-w-xl mx-auto text-sm mt-1">Sama-sama ada di lapangan bola, tapi fungsinya beda banget! Ayo bantu Arafa menggambarkan perbedaannya.</p>
+            </div>
+
+            <!-- Visual Demonstration Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
+                <!-- Keliling Card -->
+                <div class="bg-blue-50 rounded-2xl p-4 border-2 border-blue-300 flex flex-col justify-between hover:scale-[1.01] transition">
+                    <div>
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="text-2xl">🏃‍♂️</span>
+                            <h3 class="text-lg font-black text-blue-800">Keliling (Perimeter)</h3>
+                        </div>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            Pikirkan keliling sebagai <strong>Garis Kapur Putih</strong> di pinggiran lapangan bola. Jika kamu diminta berlari mengitari tepi lapangan tepat di atas garis putih tersebut dari titik awal hingga kembali ke sana, itulah Keliling!
+                        </p>
+                    </div>
+
+                    <!-- Interactive Soccer Field representation for Keliling -->
+                    <div class="my-4 h-32 bg-emerald-800 rounded-xl relative border-4 border-white/40 flex items-center justify-center overflow-hidden">
+                        <!-- Running line simulator -->
+                        <div class="absolute inset-2 border-4 border-dashed border-yellow-300 running-border rounded-lg"></div>
+                        <span class="absolute top-1 left-1/2 -translate-x-1/2 text-[9px] font-black text-white bg-blue-600 px-2 py-0.5 rounded-full uppercase">Pagar / Garis Tepi</span>
+                        <div class="flex flex-col items-center z-10 text-white">
+                            <span class="text-sm font-bold">Panjang + Lebar + Panjang + Lebar</span>
+                            <span class="text-[10px] bg-black/40 px-2 py-0.5 rounded mt-1">Hanya garis pinggirannya saja!</span>
+                        </div>
+                    </div>
+
+                    <button onclick="triggerSoundDemo('keliling')" class="w-full py-2 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-xl shadow transition active:scale-95">
+                        🔊 Dengarkan Bunyi Keliling!
+                    </button>
+                </div>
+
+                <!-- Luas Card -->
+                <div class="bg-emerald-50 rounded-2xl p-4 border-2 border-emerald-300 flex flex-col justify-between hover:scale-[1.01] transition">
+                    <div>
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="text-2xl">🌱</span>
+                            <h3 class="text-lg font-black text-emerald-800">Luas (Area)</h3>
+                        </div>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            Pikirkan luas sebagai <strong>Karpet Rumput Hijau</strong> yang menutupi seluruh bagian dalam lapangan. Semua ruang hijau tempat bola memantul dan pemain berlari di dalam lapangan adalah Luas!
+                        </p>
+                    </div>
+
+                    <!-- Interactive Soccer Field representation for Luas -->
+                    <div class="my-4 h-32 grass-bg rounded-xl relative border-4 border-white/20 flex items-center justify-center overflow-hidden">
+                        <span class="absolute top-1 left-1/2 -translate-x-1/2 text-[9px] font-black text-white bg-emerald-600 px-2 py-0.5 rounded-full uppercase">Isi Rumput Lapangan</span>
+                        <div class="flex flex-col items-center z-10 text-white text-center px-4">
+                            <span class="text-sm font-bold">Panjang × Lebar</span>
+                            <span class="text-[10px] bg-black/40 px-2 py-0.5 rounded mt-1">Seluruh permukaan dalam yang hijau!</span>
+                        </div>
+                    </div>
+
+                    <button onclick="triggerSoundDemo('luas')" class="w-full py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl shadow transition active:scale-95">
+                        🔊 Dengarkan Bunyi Luas!
+                    </button>
+                </div>
+
+                <!-- NEW: Segitiga & Bentuk Tak Beraturan Card -->
+                <div class="bg-purple-50 rounded-2xl p-4 border-2 border-purple-300 flex flex-col justify-between hover:scale-[1.01] transition">
+                    <div>
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="text-2xl">📐</span>
+                            <h3 class="text-lg font-black text-purple-800">Ubin Segitiga & Bentuk U</h3>
+                        </div>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            <strong>1. Konsep Segitiga:</strong> Dua ubin segitiga 📐 + 📐 jika digabungkan akan membentuk <strong>1 Ubin Kotak Utuh</strong> 🟩! <br>
+                            <strong>2. Bentuk U/L/T:</strong> Untuk kelilingnya, kita cukup menjumlahkan seluruh panjang sisi terluar secara berurutan!
+                        </p>
+                    </div>
+
+                    <!-- Interactive representation of Triangle Combination -->
+                    <div class="my-4 h-32 bg-purple-900/10 rounded-xl relative border-2 border-purple-300 flex items-center justify-center p-2">
+                        <div class="flex items-center gap-3">
+                            <!-- Triangle Left -->
+                            <svg width="40" height="40" class="drop-shadow">
+                                <polygon points="0,40 40,40 40,0" fill="#a855f7" stroke="#ffffff" stroke-width="2"/>
+                            </svg>
+                            <span class="font-extrabold text-purple-800 text-sm">+</span>
+                            <!-- Triangle Right -->
+                            <svg width="40" height="40" class="drop-shadow">
+                                <polygon points="0,0 0,40 40,40" fill="#a855f7" stroke="#ffffff" stroke-width="2"/>
+                            </svg>
+                            <span class="font-extrabold text-purple-800 text-sm">=</span>
+                            <!-- Full Square -->
+                            <div class="w-10 h-10 bg-purple-500 border-2 border-white rounded-md flex items-center justify-center text-white font-black text-xs">1</div>
+                        </div>
+                    </div>
+
+                    <button onclick="triggerSoundDemo('segitiga')" class="w-full py-2 bg-purple-600 hover:bg-purple-700 text-white font-bold text-xs rounded-xl shadow transition active:scale-95">
+                        🔊 Dengarkan Bunyi Penggabungan!
+                    </button>
+                </div>
+            </div>
+
+            <!-- Visual Game Concept Anchor -->
+            <div class="bg-amber-50 border-2 border-amber-300 rounded-2xl p-4 flex flex-col md:flex-row items-center gap-3">
+                <span class="text-3xl">💡</span>
+                <p class="text-xs text-amber-900 leading-relaxed">
+                    <strong>Kesimpulan Desainer:</strong> Keliling diukur menggunakan satuan panjang biasa (contoh: <strong>meter / cm</strong>) karena hanya mengukur garis lurus panjang. Luas diukur menggunakan satuan persegi (contoh: <strong>meter persegi / cm²</strong>) karena kita menghitung jumlah ubin kotak di dalam bidang!
+                </p>
+            </div>
+        </section>
+
+        <!-- STEP 2: STADIUM SANDBOX -->
+        <section id="step-2" class="step-transition hidden flex flex-col gap-4">
+            <div class="text-center">
+                <span class="text-sm uppercase font-extrabold text-emerald-600 tracking-wider">Misi 2: Desain Lapangan</span>
+                <h2 class="text-2xl font-black text-slate-800">📐 Studio Gambar Stadion Kreatif (Maks 15 × 15)</h2>
+                <p class="text-gray-600 text-xs max-w-xl mx-auto">Atur panjang dan lebar lapangan sepak bola impianmu, lalu lihat bagaimana keliling dan luasnya dihitung secara dinamis dan mulus!</p>
+            </div>
+
+            <!-- Controls and Sandbox Layout -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
+                <!-- Sandbox Controls -->
+                <div class="bg-slate-50 border border-slate-200 p-4 rounded-2xl flex flex-col gap-4">
+                    <h3 class="text-sm font-black text-slate-700 border-b pb-1.5 flex items-center justify-between">
+                        <span>🔧 Alat Ukur Lapangan</span>
+                        <span class="bg-indigo-100 text-indigo-800 text-[10px] px-2 py-0.5 rounded-full">Unit: Meter (m)</span>
+                    </h3>
+
+                    <!-- Length Control -->
+                    <div class="flex flex-col gap-1.5">
+                        <div class="flex justify-between items-center text-xs">
+                            <span class="font-bold text-slate-600">Panjang Lapangan (p):</span>
+                            <span class="font-extrabold text-indigo-600 text-sm" id="label-panjang">6 m</span>
+                        </div>
+                        <div class="flex gap-2">
+                            <button onclick="adjustFieldSize('panjang', -1)" class="w-10 h-10 bg-white border border-slate-300 text-slate-700 font-extrabold rounded-lg hover:bg-indigo-50 hover:border-indigo-400 active:scale-90 transition">-</button>
+                            <input type="range" id="slider-panjang" min="2" max="15" value="6" oninput="onSliderAdjust()" class="flex-grow accent-indigo-600">
+                            <button onclick="adjustFieldSize('panjang', 1)" class="w-10 h-10 bg-white border border-slate-300 text-slate-700 font-extrabold rounded-lg hover:bg-indigo-50 hover:border-indigo-400 active:scale-90 transition">+</button>
+                        </div>
+                    </div>
+
+                    <!-- Width Control -->
+                    <div class="flex flex-col gap-1.5">
+                        <div class="flex justify-between items-center text-xs">
+                            <span class="font-bold text-slate-600">Lebar Lapangan (l):</span>
+                            <span class="font-extrabold text-indigo-600 text-sm" id="label-lebar">4 m</span>
+                        </div>
+                        <div class="flex gap-2">
+                            <button onclick="adjustFieldSize('lebar', -1)" class="w-10 h-10 bg-white border border-slate-300 text-slate-700 font-extrabold rounded-lg hover:bg-indigo-50 hover:border-indigo-400 active:scale-90 transition">-</button>
+                            <input type="range" id="slider-lebar" min="2" max="15" value="4" oninput="onSliderAdjust()" class="flex-grow accent-indigo-600">
+                            <button onclick="adjustFieldSize('lebar', 1)" class="w-10 h-10 bg-white border border-slate-300 text-slate-700 font-extrabold rounded-lg hover:bg-indigo-50 hover:border-indigo-400 active:scale-90 transition">+</button>
+                        </div>
+                    </div>
+
+                    <!-- Interactive Demonstration Trigger Buttons -->
+                    <div class="grid grid-cols-2 gap-2 pt-2">
+                        <button onclick="startSandboxDemo('keliling')" class="py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-extrabold text-xs rounded-xl flex items-center justify-center gap-1.5 shadow active:scale-95 transition">
+                            🏃‍♂️ Lari Keliling!
+                        </button>
+                        <button onclick="startSandboxDemo('luas')" class="py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs rounded-xl flex items-center justify-center gap-1.5 shadow active:scale-95 transition">
+                            🚜 Potong Rumput!
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Live Field Simulation Viewport (Dynamic GRID with Auto-scaling) -->
+                <div class="lg:col-span-2 flex flex-col gap-4">
+                    <!-- The Grid View -->
+                    <div class="w-full bg-slate-800 rounded-3xl p-4 border-4 border-slate-700 shadow-inner relative flex items-center justify-center overflow-hidden min-h-[300px]">
+                        <!-- Soccer Field Visual Elements inside -->
+                        <div class="absolute inset-0 bg-emerald-900/30"></div>
+                        <div class="absolute inset-4 border-2 border-white/10 rounded-2xl pointer-events-none flex items-center justify-center">
+                            <div class="w-24 h-24 rounded-full border-2 border-white/10"></div>
+                            <div class="absolute left-0 right-0 h-0.5 bg-white/10 top-1/2 -translate-y-1/2"></div>
+                        </div>
+
+                        <!-- Dynamic Drawing Grid Sandbox Area -->
+                        <div id="sandbox-grid" class="grid gap-1 relative z-10 bg-emerald-800/80 p-2 rounded-2xl border-2 border-white/20">
+                            <!-- JS will generate grid cells here dynamically -->
+                        </div>
+
+                        <!-- Flying soccer ball indicator for keliling / lawn mower for luas -->
+                        <div id="runner-sprite" class="absolute pointer-events-none z-20 text-xl md:text-2xl transition-all duration-300 ease-out opacity-0">⚽</div>
+                    </div>
+
+                    <!-- Math & Formulas Dashboard -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                        <div class="bg-blue-50 border-2 border-blue-200 p-3 rounded-2xl flex flex-col justify-between">
+                            <div class="text-[10px] font-black text-blue-700 tracking-wider uppercase">PENGUKURAN KELILING (PAGAR LAPANGAN)</div>
+                            <div class="text-slate-800 font-extrabold text-lg my-1" id="sandbox-formula-keliling">
+                                Keliling = <span class="text-blue-600">20 m</span>
+                            </div>
+                            <div class="text-[10px] text-slate-500 font-medium" id="sandbox-explain-keliling">
+                                Lari: 6 + 4 + 6 + 4 = 20 m
+                            </div>
+                        </div>
+
+                        <div class="bg-emerald-50 border-2 border-emerald-200 p-3 rounded-2xl flex flex-col justify-between">
+                            <div class="text-[10px] font-black text-emerald-700 tracking-wider uppercase">PENGUKURAN LUAS (TEBAL RUMPUT)</div>
+                            <div class="text-slate-800 font-extrabold text-lg my-1" id="sandbox-formula-luas">
+                                Luas = <span class="text-emerald-600">24 m²</span>
+                            </div>
+                            <div class="text-[10px] text-slate-500 font-medium" id="sandbox-explain-luas">
+                                Rumput: 6 × 4 = 24 ubin persegi (m²)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- STEP 3: INTERACTIVE GRID MATCHING GAME -->
+        <section id="step-3" class="step-transition hidden flex flex-col gap-4">
+            <div class="text-center">
+                <span class="text-sm uppercase font-extrabold text-emerald-600 tracking-wider">Misi 3: Gambar Grid</span>
+                <h2 class="text-2xl font-black text-slate-800">🎨 Misi Kontraktor Stadion Mandiri (Kertas Kotak Biru-Red)</h2>
+                <p class="text-gray-600 text-xs max-w-xl mx-auto">Ketuk kotak di bawah untuk merancang Tameng! Siklus ubin: **Kosong ➡️ Kotak Biru (1) ➡️ Segitiga Merah Kanan (0.5) ➡️ Segitiga Merah Kiri (0.5) ➡️ Kosong**.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
+                <!-- Mission Objective Card -->
+                <div class="bg-slate-50 border-2 border-dashed border-emerald-400 p-4 rounded-2xl flex flex-col gap-3">
+                    <span class="bg-emerald-100 text-emerald-800 font-bold px-2.5 py-1 rounded-full text-[10px] uppercase text-center" id="game-mission-title">Papan Strategi: Desain Kastil</span>
+                    
+                    <div class="text-center py-2 bg-white rounded-xl shadow-sm border border-emerald-100 flex flex-col items-center">
+                        <span class="text-xs text-gray-500 font-bold">🎯 TARGET LUAS (WARNA)</span>
+                        <span id="target-game-luas" class="text-3xl font-black text-emerald-600">6 kotak</span>
+                    </div>
+
+                    <div class="text-center py-2 bg-white rounded-xl shadow-sm border border-emerald-100 flex flex-col items-center">
+                        <span class="text-xs text-gray-500 font-bold">🎯 TARGET KELILING (TEPI)</span>
+                        <span id="target-game-keliling" class="text-3xl font-black text-blue-600">12.8 unit</span>
+                    </div>
+
+                    <!-- Legend for building blocks -->
+                    <div class="bg-white p-3 rounded-xl border border-slate-100 text-[11px] flex flex-col gap-1.5">
+                        <span class="font-bold text-slate-700">Gaya Gambar Ubin:</span>
+                        <div class="flex items-center gap-2">
+                            <span class="w-5 h-5 bg-white border border-slate-300 rounded-sm"></span>
+                            <span>Kertas Kosong (0)</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="w-5 h-5 bg-blue-500 border border-white rounded-sm flex items-center justify-center text-[10px] text-white">🟦</span>
+                            <span>Kotak Biru Utuh (Luas = 1)</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <div class="w-5 h-5 relative border border-slate-300 bg-white overflow-hidden">
+                                <svg class="absolute inset-0 w-full h-full" viewBox="0 0 20 20"><polygon points="0,20 20,20 20,0" fill="#ef4444"/></svg>
+                            </div>
+                            <span>Segitiga Kanan (Luas = 0.5)</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <div class="w-5 h-5 relative border border-slate-300 bg-white overflow-hidden">
+                                <svg class="absolute inset-0 w-full h-full" viewBox="0 0 20 20"><polygon points="0,20 0,0 20,20" fill="#ef4444"/></svg>
+                            </div>
+                            <span>Segitiga Kiri (Luas = 0.5)</span>
+                        </div>
+                    </div>
+
+                    <!-- Clear Grid & Reset Game -->
+                    <div class="grid grid-cols-2 gap-2">
+                        <button onclick="resetGameGrid()" class="py-2 bg-rose-100 hover:bg-rose-200 border border-rose-300 text-rose-700 font-extrabold text-xs rounded-xl active:scale-95 transition">
+                            🧹 Bersihkan
+                        </button>
+                        <button onclick="generateGameMisi()" class="py-2 bg-amber-100 hover:bg-amber-200 border border-amber-300 text-amber-700 font-extrabold text-xs rounded-xl active:scale-95 transition">
+                            🎲 Misi Acak
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Interactive Draw Grid Panel -->
+                <div class="md:col-span-2 flex flex-col gap-3 items-center">
+                    <!-- The clickable grid (Grid paper design: white with light blue borders) -->
+                    <div class="bg-blue-50/50 p-4 rounded-3xl border-4 border-blue-200 shadow-inner w-full max-w-sm aspect-square flex items-center justify-center">
+                        <div id="game-grid-draw" class="grid grid-cols-6 grid-rows-6 gap-[1.5px] bg-blue-200 border-2 border-blue-300 w-full h-full">
+                            <!-- Draw grid automatically created via JS -->
+                        </div>
+                    </div>
+
+                    <!-- Live Calculation indicators -->
+                    <div class="flex justify-around items-center w-full max-w-sm bg-indigo-50 border border-indigo-200 rounded-2xl p-3 text-xs">
+                        <div class="text-center">
+                            <span class="font-bold text-slate-500 block">Luas Gambarmu</span>
+                            <span id="current-game-luas" class="text-lg font-black text-emerald-600">0 ubin</span>
+                        </div>
+                        <div class="h-8 w-px bg-indigo-200"></div>
+                        <div class="text-center">
+                            <span class="font-bold text-slate-500 block">Keliling Garis Luar</span>
+                            <span id="current-game-keliling" class="text-lg font-black text-blue-600">0 unit</span>
+                        </div>
+                    </div>
+
+                    <!-- Goal Success Splash Screen inside Step 3 -->
+                    <div id="game-success-banner" class="hidden text-center pop-effect bg-emerald-100 text-emerald-800 border-2 border-emerald-300 px-5 py-3 rounded-2xl font-bold flex flex-col items-center gap-2 w-full max-w-md shadow">
+                        <span class="text-sm">🏆 HEBAT! Arafa berhasil mendesain Tameng dengan Luas <span id="succ-luas" class="underline">6</span> dan Keliling <span id="succ-keliling" class="underline">12.8</span>!</span>
+                        <button onclick="generateGameMisi()" class="px-4 py-2 bg-emerald-500 hover:bg-emerald-600 text-white rounded-lg shadow transition text-xs font-bold">
+                            Buat Desain Baru! 🚀
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- STEP 4: MEGA QUIZ -->
+        <section id="step-4" class="step-transition hidden flex flex-col gap-4">
+            <div class="text-center">
+                <span class="text-sm uppercase font-extrabold text-emerald-600 tracking-wider">Misi 4: Kuis Lapangan</span>
+                <h2 class="text-2xl font-black text-slate-800">📋 Kuis Detektif Lapangan Sepak Bola (30 Soal Lengkap)</h2>
+                <p class="text-gray-600 text-xs max-w-xl mx-auto">Yuk, uji kemampuan arsitekmu dengan 30 pertanyaan seru tentang persegi panjang, bentuk tidak beraturan, dan ubin segitiga!</p>
+            </div>
+
+            <!-- Quiz Layout: Question Board -->
+            <div class="w-full flex flex-col gap-4">
+                <!-- Quiz Card -->
+                <div class="bg-white border-2 border-emerald-100 rounded-3xl p-4 md:p-6 shadow flex flex-col gap-4 max-w-xl mx-auto w-full">
+                    <div class="flex justify-between items-center pb-2 border-b border-slate-100 text-xs">
+                        <span class="bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded-full">Soal <span id="quiz-lbl-current">1</span> dari 30</span>
+                        <span class="bg-yellow-100 text-yellow-800 font-bold px-2 py-0.5 rounded-full">Skor Benar: <span id="quiz-lbl-score">0</span></span>
+                    </div>
+
+                    <!-- Visual Question Renderer -->
+                    <div id="quiz-visualizer-box" class="w-full bg-slate-50 rounded-2xl p-3 border border-slate-200 flex flex-col items-center justify-center min-h-[180px]">
+                        <!-- Dynamic drawing layout based on question type -->
+                    </div>
+
+                    <!-- Text Question -->
+                    <p id="quiz-question-txt" class="text-sm md:text-base font-extrabold text-slate-700 text-center leading-relaxed">
+                        Memuat pertanyaan...
+                    </p>
+
+                    <!-- Multiple Choices Grid -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3" id="quiz-choices-container">
+                        <!-- Choices buttons generated dynamically by JS -->
+                    </div>
+
+                    <!-- Instant Interactive feedback text -->
+                    <div id="quiz-feedback-box" class="h-6 text-xs font-bold text-center mt-1"></div>
+                </div>
+
+                <!-- Quiz Complete Summary Box -->
+                <div id="quiz-end-summary" class="hidden w-full max-w-md mx-auto bg-emerald-50 border-2 border-emerald-300 rounded-3xl p-5 text-center flex flex-col items-center gap-3 shadow">
+                    <span class="text-4xl">🎉</span>
+                    <h3 class="font-extrabold text-emerald-900 text-base">Seluruh Latihan Kuis Selesai!</h3>
+                    <p class="text-xs text-slate-600">Detektif Arafa telah berhasil menuntaskan semua 30 kuis dengan perolehan skor: <span id="quiz-end-score" class="font-black text-emerald-600">0</span></p>
+                    <button onclick="changeStep(5)" class="px-5 py-2.5 bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl shadow font-extrabold text-xs transition active:scale-95">
+                        Lanjut untuk Ambil Lencana Emas! 🏆
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- STEP 5: REFLECTION & BADGE -->
+        <section id="step-5" class="step-transition hidden flex flex-col items-center gap-4 text-center">
+            <span class="text-sm uppercase font-extrabold text-indigo-600 tracking-wider">Misi 5: Wisuda Detektif</span>
+            <h2 class="text-2xl font-black text-slate-800">🏆 Penghargaan Arsitek Stadion Emas</h2>
+            <p class="text-gray-600 text-xs max-w-sm mx-auto">Arafa berhasil menyelesaikan seluruh rangkaian materi visual & interaktif tentang Keliling dan Luas hari ini!</p>
+
+            <!-- Final interactive reflection check -->
+            <div class="bg-indigo-50 border border-indigo-200 rounded-2xl p-4 max-w-md w-full">
+                <h4 class="font-bold text-indigo-900 text-sm mb-1">💡 Pertanyaan Arsitek Terakhir</h4>
+                <p class="text-gray-700 text-xs mb-3">"Jika kita ingin memasang pagar pengaman di sekeliling luar stadion futsal, kita harus menghitung apa?"</p>
+                <div class="grid grid-cols-2 gap-2">
+                    <button onclick="checkReflectionAnswer(true)" class="p-2.5 bg-white border border-indigo-200 hover:bg-indigo-100 text-indigo-900 font-extrabold text-xs rounded-lg active:scale-95 transition">Keliling Lapangan</button>
+                    <button onclick="checkReflectionAnswer(false)" class="p-2.5 bg-white border border-indigo-200 hover:bg-indigo-100 text-indigo-900 font-extrabold text-xs rounded-lg active:scale-95 transition">Luas Lapangan</button>
+                </div>
+                <div id="reflection-feedback" class="h-6 mt-2 text-xs font-bold"></div>
+            </div>
+
+            <!-- Glowing Trophy badge illustration with SVG -->
+            <div class="bg-gradient-to-tr from-yellow-200 via-amber-50 to-orange-200 p-6 rounded-full border-4 border-yellow-400 shadow-lg bouncing-ball w-36 h-36 flex flex-col items-center justify-center relative my-4">
+                <span class="text-4xl mb-1">🏅</span>
+                <span class="text-[8px] font-black text-amber-800 uppercase tracking-widest">LEVEL 2</span>
+                <span class="text-xs font-black text-amber-900 text-center leading-none">Arsitek<br>Keliling & Luas</span>
+                <div class="absolute -bottom-1.5 bg-emerald-500 text-white font-extrabold text-[9px] px-3 py-0.5 rounded-full shadow-md">LULUS SESI 2!</div>
+            </div>
+
+            <!-- Session Checklist Tracker -->
+            <div class="bg-slate-50 border border-slate-200 rounded-2xl p-4 w-full max-w-md shadow-sm">
+                <span class="text-[10px] font-black text-slate-400 uppercase tracking-widest">Papan Laporan Kemajuan Arafa</span>
+                <div class="flex flex-col gap-2 mt-3 text-left">
+                    <div class="flex items-center justify-between p-2 bg-emerald-50 text-emerald-800 border border-emerald-200 rounded-xl font-bold text-xs">
+                        <span>✨ Sesi 1: Detektif Ikatan & Pasukan Satuan</span>
+                        <span class="bg-emerald-500 text-white px-2 py-0.5 rounded-md text-[8px]">SELESAI</span>
+                    </div>
+                    <div class="flex items-center justify-between p-2 bg-emerald-100 text-emerald-800 border border-emerald-300 rounded-xl font-bold text-xs">
+                        <span>⚽ Sesi 2: Keliling & Luas Lapangan Bola (Kelas 3)</span>
+                        <span class="bg-emerald-500 text-white px-2 py-0.5 rounded-md text-[8px]">BERHASIL</span>
+                    </div>
+                    <div class="flex items-center justify-between p-2 bg-gray-100 text-gray-400 rounded-xl font-bold text-xs">
+                        <span>🔒 Sesi 3: Pecahan Berbagi Kue & Cokelat</span>
+                        <span class="bg-gray-300 text-white px-2 py-0.5 rounded-md text-[8px]">TERKUNCI</span>
+                    </div>
+                </div>
+            </div>
+
+            <button onclick="window.print()" class="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs rounded-xl shadow hover:shadow-emerald-200 active:scale-95 transition">
+                Cetak Sertifikat Kelulusan 🖨️
+            </button>
+        </section>
+
+        <!-- FOOTER NAVIGATOR CONTROLS -->
+        <footer class="flex justify-between items-center mt-6 pt-4 border-t border-slate-100 w-full">
+            <button id="prev-btn" onclick="navigateStep(-1)" class="px-4 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-600 font-extrabold text-xs rounded-xl transition disabled:opacity-50" disabled>
+                ⬅️ Kembali
+            </button>
+            <button id="next-btn" onclick="navigateStep(1)" class="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs rounded-xl transition shadow hover:shadow-emerald-100">
+                Lanjut ➡️
+            </button>
+        </footer>
+    </main>
+
+    <script>
+        // Core application state
+        const state = {
+            currentStep: 1,
+            points: 100,
+            audioCtx: null,
+            // Sandbox State
+            sandboxPanjang: 6,
+            sandboxLebar: 4,
+            isSandboxPlaying: false,
+            // Game State (Misi 3 - 6x6 clickable)
+            gameTargetLuas: 6,
+            gameTargetKeliling: 12.8,
+            // Store cell types: 0 = empty, 1 = whole blue square, 2 = triangle right red, 3 = triangle left red
+            gameCells: Array(36).fill(0),
+            // Quiz State
+            currentQuizIndex: 0,
+            quizScore: 0,
+            quizStates: Array(30).fill(null), // null: uncompleted, true: correct, false: incorrect
+            quizAnswers: Array(30).fill(null) // stores answer index clicked
+        };
+
+        // Synthesize dynamic retro-arcade sports sound effects
+        function initAudio() {
+            if (!state.audioCtx) {
+                state.audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+        }
+
+        function playSynthSound(type) {
+            initAudio();
+            if (!state.audioCtx) return;
+
+            const osc = state.audioCtx.createOscillator();
+            const gainNode = state.audioCtx.createGain();
+            osc.connect(gainNode);
+            gainNode.connect(state.audioCtx.destination);
+            const now = state.audioCtx.currentTime;
+
+            if (type === 'click') {
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(350, now);
+                osc.frequency.exponentialRampToValueAtTime(800, now + 0.1);
+                gainNode.gain.setValueAtTime(0.1, now);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, now + 0.1);
+                osc.start(now);
+                osc.stop(now + 0.1);
+            } else if (type === 'whistle') {
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(2200, now);
+                osc.frequency.setValueAtTime(2300, now + 0.08);
+                osc.frequency.setValueAtTime(2200, now + 0.16);
+                gainNode.gain.setValueAtTime(0.15, now);
+                gainNode.gain.setValueAtTime(0.01, now + 0.35);
+                osc.start(now);
+                osc.stop(now + 0.35);
+            } else if (type === 'cheer') {
+                const bufferSize = state.audioCtx.sampleRate * 1.5;
+                const buffer = state.audioCtx.createBuffer(1, bufferSize, state.audioCtx.sampleRate);
+                const data = buffer.getChannelData(0);
+                for (let i = 0; i < bufferSize; i++) {
+                    data[i] = Math.random() * 2 - 1;
+                }
+                const noiseNode = state.audioCtx.createBufferSource();
+                noiseNode.buffer = buffer;
+                
+                const filter = state.audioCtx.createBiquadFilter();
+                filter.type = 'lowpass';
+                filter.frequency.setValueAtTime(1000, now);
+                filter.frequency.linearRampToValueAtTime(400, now + 1.2);
+
+                const noiseGain = state.audioCtx.createGain();
+                noiseGain.gain.setValueAtTime(0.2, now);
+                noiseGain.gain.exponentialRampToValueAtTime(0.01, now + 1.4);
+
+                noiseNode.connect(filter);
+                filter.connect(noiseGain);
+                noiseGain.connect(state.audioCtx.destination);
+
+                noiseNode.start(now);
+                noiseNode.stop(now + 1.5);
+            } else if (type === 'buzz') {
+                osc.type = 'sawtooth';
+                osc.frequency.setValueAtTime(160, now);
+                osc.frequency.linearRampToValueAtTime(90, now + 0.35);
+                gainNode.gain.setValueAtTime(0.12, now);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, now + 0.35);
+                osc.start(now);
+                osc.stop(now + 0.45);
+            } else if (type === 'correct') {
+                const chimes = [523.25, 659.25, 783.99, 1046.50];
+                chimes.forEach((freq, i) => {
+                    const localOsc = state.audioCtx.createOscillator();
+                    const localGain = state.audioCtx.createGain();
+                    localOsc.connect(localGain);
+                    localGain.connect(state.audioCtx.destination);
+                    localOsc.type = 'sine';
+                    localOsc.frequency.setValueAtTime(freq, now + (i * 0.08));
+                    localGain.gain.setValueAtTime(0.1, now + (i * 0.08));
+                    localGain.gain.exponentialRampToValueAtTime(0.01, now + (i * 0.08) + 0.2);
+                    localOsc.start(now + (i * 0.08));
+                    localOsc.stop(now + (i * 0.08) + 0.25);
+                });
+            }
+        }
+
+        // Trigger conceptual auditory explanations
+        function triggerSoundDemo(concept) {
+            playSynthSound('click');
+            setTimeout(() => {
+                if (concept === 'keliling') {
+                    initAudio();
+                    const now = state.audioCtx.currentTime;
+                    for (let i = 0; i < 4; i++) {
+                        const o = state.audioCtx.createOscillator();
+                        const g = state.audioCtx.createGain();
+                        o.connect(g); g.connect(state.audioCtx.destination);
+                        o.type = 'triangle';
+                        o.frequency.setValueAtTime(300 + (i * 100), now + (i * 0.15));
+                        g.gain.setValueAtTime(0.1, now + (i * 0.15));
+                        g.gain.exponentialRampToValueAtTime(0.01, now + (i * 0.15) + 0.1);
+                        o.start(now + (i * 0.15));
+                        o.stop(now + (i * 0.15) + 0.12);
+                    }
+                } else if (concept === 'luas') {
+                    initAudio();
+                    const now = state.audioCtx.currentTime;
+                    const o = state.audioCtx.createOscillator();
+                    const g = state.audioCtx.createGain();
+                    o.connect(g); g.connect(state.audioCtx.destination);
+                    o.type = 'sine';
+                    o.frequency.setValueAtTime(200, now);
+                    o.frequency.exponentialRampToValueAtTime(800, now + 0.8);
+                    g.gain.setValueAtTime(0.02, now);
+                    g.gain.linearRampToValueAtTime(0.12, now + 0.2);
+                    g.gain.exponentialRampToValueAtTime(0.01, now + 0.8);
+                    o.start(now);
+                    o.stop(now + 0.8);
+                } else {
+                    // Triangle synthesis
+                    initAudio();
+                    const now = state.audioCtx.currentTime;
+                    const o1 = state.audioCtx.createOscillator();
+                    const o2 = state.audioCtx.createOscillator();
+                    const g = state.audioCtx.createGain();
+                    o1.connect(g); o2.connect(g); g.connect(state.audioCtx.destination);
+                    o1.type = 'sine'; o2.type = 'sine';
+                    o1.frequency.setValueAtTime(440, now);
+                    o2.frequency.setValueAtTime(880, now + 0.1);
+                    g.gain.setValueAtTime(0.08, now);
+                    g.gain.exponentialRampToValueAtTime(0.01, now + 0.6);
+                    o1.start(now); o2.start(now);
+                    o1.stop(now + 0.6); o2.stop(now + 0.6);
+                }
+            }, 100);
+        }
+
+        function changeStep(stepNum) {
+            playSynthSound('click');
+            document.getElementById(`step-${state.currentStep}`).classList.add('hidden');
+            document.getElementById(`step-${stepNum}`).classList.remove('hidden');
+
+            document.getElementById(`nav-btn-${state.currentStep}`).className = "flex flex-col items-center p-2 rounded-xl transition duration-300 bg-gray-50 text-gray-400 font-bold text-xs";
+            document.getElementById(`nav-btn-${stepNum}`).className = "flex flex-col items-center p-2 rounded-xl transition duration-300 bg-emerald-100 text-emerald-800 font-bold text-xs";
+
+            state.currentStep = stepNum;
+            document.getElementById('prev-btn').disabled = (stepNum === 1);
+            
+            const nextBtn = document.getElementById('next-btn');
+            if (stepNum === 5) {
+                nextBtn.innerHTML = "Selesai 🏁";
+                nextBtn.className = "px-5 py-2.5 bg-emerald-500 hover:bg-emerald-600 text-white font-extrabold text-xs rounded-xl transition shadow";
+            } else {
+                nextBtn.innerHTML = "Lanjut ➡️";
+                nextBtn.className = "px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs rounded-xl transition shadow";
+            }
+
+            if (stepNum === 2) {
+                renderSandbox();
+            } else if (stepNum === 3) {
+                generateGameMisi();
+            } else if (stepNum === 4) {
+                initMegaQuiz();
+            }
+        }
+
+        function navigateStep(direction) {
+            const nextStep = state.currentStep + direction;
+            if (nextStep >= 1 && nextStep <= 5) {
+                changeStep(nextStep);
+            } else if (nextStep > 5) {
+                playSynthSound('cheer');
+                customAlert("Hebat Arafa! Kamu adalah Arsitek Lapangan Bola yang handal. Sesi belajar hari ini selesai!");
+            }
+        }
+
+        function customAlert(message) {
+            const wrapper = document.createElement('div');
+            wrapper.className = "fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 z-50 pop-effect";
+            wrapper.innerHTML = `
+                <div class="bg-white rounded-3xl p-5 border-4 border-emerald-500 max-w-sm w-full text-center flex flex-col items-center gap-3 shadow-2xl">
+                    <span class="text-4xl">⚽🏟️</span>
+                    <h4 class="text-lg font-black text-emerald-800">Pesan Pelatih</h4>
+                    <p class="text-gray-600 text-xs font-semibold leading-relaxed">${message}</p>
+                    <button onclick="this.parentElement.parentElement.remove()" class="w-full py-2.5 bg-emerald-500 hover:bg-emerald-600 text-white font-extrabold rounded-xl shadow transition text-xs">Ayo Main Lagi!</button>
+                </div>
+            `;
+            document.body.appendChild(wrapper);
+        }
+
+        // STEP 2: SANDBOX IMPLEMENTATION (SCALED TO 15x15, SLOWER RUNNERS)
+        function onSliderAdjust() {
+            state.sandboxPanjang = parseInt(document.getElementById('slider-panjang').value);
+            state.sandboxLebar = parseInt(document.getElementById('slider-lebar').value);
+            renderSandbox();
+        }
+
+        function adjustFieldSize(param, delta) {
+            if (param === 'panjang') {
+                const targetVal = state.sandboxPanjang + delta;
+                if (targetVal >= 2 && targetVal <= 15) {
+                    state.sandboxPanjang = targetVal;
+                    document.getElementById('slider-panjang').value = targetVal;
+                }
+            } else {
+                const targetVal = state.sandboxLebar + delta;
+                if (targetVal >= 2 && targetVal <= 15) {
+                    state.sandboxLebar = targetVal;
+                    document.getElementById('slider-lebar').value = targetVal;
+                }
+            }
+            renderSandbox();
+        }
+
+        function renderSandbox() {
+            const p = state.sandboxPanjang;
+            const l = state.sandboxLebar;
+
+            document.getElementById('label-panjang').innerText = `${p} m`;
+            document.getElementById('label-lebar').innerText = `${l} m`;
+
+            const kelilingVal = 2 * (p + l);
+            const luasVal = p * l;
+
+            document.getElementById('sandbox-formula-keliling').innerHTML = `Keliling = <span class="text-blue-600">${kelilingVal} m</span>`;
+            document.getElementById('sandbox-explain-keliling').innerText = `Perhitungan: ${p} + ${l} + ${p} + ${l} = ${kelilingVal} meter`;
+
+            document.getElementById('sandbox-formula-luas').innerHTML = `Luas = <span class="text-emerald-600">${luasVal} m²</span>`;
+            document.getElementById('sandbox-explain-luas').innerText = `Perhitungan: ${p} × ${l} = ${luasVal} ubin rumput persegi (m²)`;
+
+            const gridContainer = document.getElementById('sandbox-grid');
+            gridContainer.style.gridTemplateColumns = `repeat(${p}, minmax(0, 1fr))`;
+            gridContainer.innerHTML = '';
+
+            const cellSizeClass = p > 10 || l > 10 
+                ? "w-4 h-4 md:w-6 md:h-6 text-[7px]" 
+                : "w-8 h-8 md:w-11 md:h-11 text-[10px]";
+
+            for (let r = 0; r < l; r++) {
+                for (let c = 0; c < p; c++) {
+                    const isBorder = (r === 0 || r === l - 1 || c === 0 || c === p - 1);
+                    const cell = document.createElement('div');
+                    cell.className = `${cellSizeClass} rounded-md transition duration-500 flex items-center justify-center font-black shadow-sm `;
+                    
+                    if (isBorder) {
+                        cell.className += "bg-emerald-700 text-emerald-100 border-2 border-white/60";
+                    } else {
+                        cell.className += "bg-emerald-600 text-emerald-200 border border-emerald-500";
+                    }
+
+                    cell.id = `sandbox-cell-${r}-${c}`;
+                    cell.innerHTML = `🌱`;
+                    gridContainer.appendChild(cell);
+                }
+            }
+        }
+
+        function startSandboxDemo(mode) {
+            if (state.isSandboxPlaying) return;
+            state.isSandboxPlaying = true;
+            playSynthSound('whistle');
+
+            const p = state.sandboxPanjang;
+            const l = state.sandboxLebar;
+            const sprite = document.getElementById('runner-sprite');
+            sprite.style.opacity = '1';
+
+            if (mode === 'keliling') {
+                sprite.innerText = '⚽';
+                const path = [];
+                for (let c = 0; c < p; c++) path.push({r: 0, c: c});
+                for (let r = 1; r < l; r++) path.push({r: r, c: p-1});
+                for (let c = p - 2; c >= 0; c--) path.push({r: l-1, c: c});
+                for (let r = l - 2; r > 0; r--) path.push({r: r, c: 0});
+
+                let step = 0;
+                function runAnimation() {
+                    if (step >= path.length) {
+                        sprite.style.opacity = '0';
+                        state.isSandboxPlaying = false;
+                        playSynthSound('correct');
+                        return;
+                    }
+
+                    const coord = path[step];
+                    const activeCell = document.getElementById(`sandbox-cell-${coord.r}-${coord.c}`);
+                    if (activeCell) {
+                        activeCell.classList.add('bg-yellow-400', 'text-yellow-950', 'scale-110', 'rotate-12');
+                        playSynthSound('click');
+                        
+                        const rect = activeCell.getBoundingClientRect();
+                        const gridRect = document.getElementById('sandbox-grid').getBoundingClientRect();
+                        sprite.style.left = `${rect.left - gridRect.left + 2}px`;
+                        sprite.style.top = `${rect.top - gridRect.top + 2}px`;
+
+                        setTimeout(() => {
+                            activeCell.classList.remove('bg-yellow-400', 'text-yellow-950', 'scale-110', 'rotate-12');
+                        }, 400);
+                    }
+
+                    step++;
+                    setTimeout(runAnimation, 450);
+                }
+                runAnimation();
+
+            } else {
+                sprite.innerText = '🚜';
+                let r = 0;
+                let c = 0;
+
+                function cutGrass() {
+                    if (r >= l) {
+                        sprite.style.opacity = '0';
+                        state.isSandboxPlaying = false;
+                        playSynthSound('cheer');
+                        setTimeout(renderSandbox, 1500);
+                        return;
+                    }
+
+                    const activeCell = document.getElementById(`sandbox-cell-${r}-${c}`);
+                    if (activeCell) {
+                        activeCell.classList.add('bg-amber-100', 'text-amber-900', 'scale-95');
+                        activeCell.innerHTML = '🌾';
+                        playSynthSound('click');
+
+                        const rect = activeCell.getBoundingClientRect();
+                        const gridRect = document.getElementById('sandbox-grid').getBoundingClientRect();
+                        sprite.style.left = `${rect.left - gridRect.left + 2}px`;
+                        sprite.style.top = `${rect.top - gridRect.top + 2}px`;
+                    }
+
+                    c++;
+                    if (c >= p) {
+                        c = 0;
+                        r++;
+                    }
+                    setTimeout(cutGrass, 350);
+                }
+                cutGrass();
+            }
+        }
+
+        // STEP 3: INTERACTIVE GRID MATCHING GAME (WITH ROBLOX blue-squares/red-triangles aesthetics)
+        const gamePolaMisi = [
+            { nama: "Tameng Roblox Klasik", a: 6, p: 12.8 },
+            { nama: "Mahkota Kerajaan Futsal", a: 6, p: 13.6 },
+            { nama: "Kapal Layar Kecil", a: 7, p: 16.8 },
+            { nama: "Pondasi Benteng Kastil", a: 11, p: 18 },
+            { nama: "Logo Kupu-Kupu Futsal", a: 6, p: 14.8 },
+            { nama: "Panggung Juara Emas", a: 14, p: 24 }
+        ];
+
+        function generateGameMisi() {
+            document.getElementById('game-success-banner').classList.add('hidden');
+            
+            const pattern = gamePolaMisi[Math.floor(Math.random() * gamePolaMisi.length)];
+            state.gameTargetLuas = pattern.a;
+            state.gameTargetKeliling = pattern.p;
+
+            document.getElementById('game-mission-title').innerText = `Misi: ${pattern.nama}`;
+            document.getElementById('target-game-luas').innerText = `${pattern.a} kotak`;
+            document.getElementById('target-game-keliling').innerText = `${pattern.p} unit`;
+
+            resetGameGrid();
+        }
+
+        function resetGameGrid() {
+            state.gameCells = Array(36).fill(0);
+            const drawGrid = document.getElementById('game-grid-draw');
+            drawGrid.innerHTML = '';
+
+            for (let i = 0; i < 36; i++) {
+                const cell = document.createElement('div');
+                // Grid paper look: white grid cells with light blue borders
+                cell.className = "bg-white hover:bg-blue-50/50 border border-blue-100 cursor-pointer transition flex items-center justify-center text-xs select-none h-full w-full relative overflow-hidden";
+                cell.dataset.index = i;
+                cell.addEventListener('mousedown', () => cycleGameCell(i));
+                drawGrid.appendChild(cell);
+            }
+            updateGameLiveCalculations();
+        }
+
+        function cycleGameCell(index) {
+            playSynthSound('click');
+            const cell = document.querySelector(`[data-index='${index}']`);
+            
+            // Cycle: 0 (Empty) -> 1 (Whole Blue Square 🟦) -> 2 (Triangle Red Right-Bottom 📐) -> 3 (Triangle Red Left-Bottom 📐) -> 0
+            if (state.gameCells[index] === 0) {
+                state.gameCells[index] = 1;
+                cell.className = "bg-blue-500 hover:bg-blue-400 border border-white rounded-sm cursor-pointer transition flex items-center justify-center text-xs text-white font-extrabold select-none scale-105 shadow-sm";
+                cell.innerHTML = '🟦';
+            } else if (state.gameCells[index] === 1) {
+                state.gameCells[index] = 2;
+                cell.className = "bg-white hover:bg-blue-50/50 border border-blue-100 cursor-pointer transition flex items-center justify-center text-xs text-white font-extrabold select-none overflow-hidden relative";
+                cell.innerHTML = `
+                    <svg class="absolute inset-0 w-full h-full" viewBox="0 0 40 40">
+                        <polygon points="0,40 40,40 40,0" fill="#ef4444" stroke="#ffffff" stroke-width="2"/>
+                    </svg>
+                    <span class="absolute bottom-0 right-1 text-[8px] font-black z-10 text-white">0.5</span>
+                `;
+            } else if (state.gameCells[index] === 2) {
+                state.gameCells[index] = 3;
+                cell.className = "bg-white hover:bg-blue-50/50 border border-blue-100 cursor-pointer transition flex items-center justify-center text-xs text-white font-extrabold select-none overflow-hidden relative";
+                cell.innerHTML = `
+                    <svg class="absolute inset-0 w-full h-full" viewBox="0 0 40 40">
+                        <polygon points="0,40 0,0 40,40" fill="#ef4444" stroke="#ffffff" stroke-width="2"/>
+                    </svg>
+                    <span class="absolute bottom-0 left-1 text-[8px] font-black z-10 text-white">0.5</span>
+                `;
+            } else {
+                state.gameCells[index] = 0;
+                cell.className = "bg-white hover:bg-blue-50/50 border border-blue-100 cursor-pointer transition flex items-center justify-center text-xs select-none";
+                cell.innerHTML = '';
+            }
+            updateGameLiveCalculations();
+        }
+
+        function updateGameLiveCalculations() {
+            let totalLuas = 0;
+            let triangleCount = 0;
+
+            for (let i = 0; i < 36; i++) {
+                if (state.gameCells[i] === 1) {
+                    totalLuas += 1.0;
+                } else if (state.gameCells[i] === 2 || state.gameCells[i] === 3) {
+                    totalLuas += 0.5;
+                    triangleCount++;
+                }
+            }
+
+            // Outer exposed vertical & horizontal straight borders calculated mathematically
+            let exposedStraightEdges = 0;
+            for (let r = 0; r < 6; r++) {
+                for (let c = 0; c < 6; c++) {
+                    const idx = r * 6 + c;
+                    const cellState = state.gameCells[idx];
+                    
+                    if (cellState > 0) {
+                        // Define boundaries belonging to this block state
+                        const hasT = (cellState === 1);
+                        const hasB = (cellState === 1 || cellState === 2 || cellState === 3);
+                        const hasL = (cellState === 1 || cellState === 3);
+                        const hasR = (cellState === 1 || cellState === 2);
+
+                        // Top Edge check
+                        if (hasT) {
+                            const neighborB = (r > 0) ? (state.gameCells[(r-1)*6 + c] === 1 || state.gameCells[(r-1)*6 + c] === 2 || state.gameCells[(r-1)*6 + c] === 3) : false;
+                            if (!neighborB) exposedStraightEdges++;
+                        }
+                        
+                        // Bottom Edge check
+                        if (hasB) {
+                            const neighborT = (r < 5) ? (state.gameCells[(r+1)*6 + c] === 1) : false;
+                            if (!neighborT) exposedStraightEdges++;
+                        }
+                        
+                        // Left Edge check
+                        if (hasL) {
+                            const neighborR = (c > 0) ? (state.gameCells[r*6 + c - 1] === 1 || state.gameCells[r*6 + c - 1] === 2) : false;
+                            if (!neighborR) exposedStraightEdges++;
+                        }
+                        
+                        // Right Edge check
+                        if (hasR) {
+                            const neighborL = (c < 5) ? (state.gameCells[r*6 + c + 1] === 1 || state.gameCells[r*6 + c + 1] === 3) : false;
+                            if (!neighborL) exposedStraightEdges++;
+                        }
+                    }
+                }
+            }
+
+            // Diagonal sides of triangles contribute 1.4 units to the perimeter
+            const diagonalEdgesLength = triangleCount * 1.4;
+            let totalKeliling = parseFloat((exposedStraightEdges + diagonalEdgesLength).toFixed(1));
+
+            document.getElementById('current-game-luas').innerText = `${totalLuas} ubin`;
+            document.getElementById('current-game-keliling').innerText = `${totalKeliling} unit`;
+
+            // Win Condition check
+            if (Math.abs(totalLuas - state.gameTargetLuas) < 0.1 && Math.abs(totalKeliling - state.gameTargetKeliling) < 0.1) {
+                playSynthSound('cheer');
+                state.points += 25;
+                document.getElementById('header-points').innerText = state.points;
+
+                const banner = document.getElementById('game-success-banner');
+                document.getElementById('succ-luas').innerText = state.gameTargetLuas;
+                document.getElementById('succ-keliling').innerText = state.gameTargetKeliling;
+                banner.classList.remove('hidden');
+                banner.classList.add('pop-effect');
+            }
+        }
+
+        // STEP 4: DEFINING 30 DETAILED QUESTIONS DATABASE
+        const quizDatabase = [
+            // Question 1
+            {
+                type: 'grid_area',
+                visual: {
+                    type: 'shield',
+                    squares: [ {r:2, c:2}, {r:2, c:3}, {r:3, c:2}, {r:3, c:3}, {r:4, c:2} ],
+                    triangles: [ {r:1, c:2, dir:'left'}, {r:1, c:3, dir:'right'} ]
+                },
+                question: "Kasus 1: Logo Tameng Kesatria Roblox. Desain tamengmu terdiri dari 5 kotak utuh (biru) dan 2 buah segitiga setengah kotak (merah). Berapakah LUAS total tameng tersebut?",
+                options: ["5 kotak", "6 kotak", "7 kotak", "4 kotak"],
+                correct: 1,
+                reason: "2 Segitiga Merah = 1 Kotak Utuh. Luas Total = 5 Kotak Biru + 1 Kotak = 6 Kotak."
+            },
+            // Question 2
+            {
+                type: 'grid_area',
+                visual: {
+                    type: 'crown',
+                    squares: [ {r:3, c:1}, {r:3, c:2}, {r:3, c:3}, {r:3, c:4} ],
+                    triangles: [ {r:2, c:1, dir:'left'}, {r:2, c:2, dir:'right'}, {r:2, c:3, dir:'left'}, {r:2, c:4, dir:'right'} ]
+                },
+                question: "Kasus 2: Mahkota Raja Futsal. Desain mahkota terdiri dari 4 kotak utuh (biru) dan 4 ubin segitiga setengah kotak (merah). Berapakah LUAS total mahkota tersebut?",
+                options: ["8 kotak", "6 kotak", "5 kotak", "7 kotak"],
+                correct: 1,
+                reason: "4 Segitiga Merah = 2 Kotak Utuh. Luas Total = 4 Kotak Biru + 2 Kotak = 6 Kotak."
+            },
+            // Question 3
+            {
+                type: 'grid_area',
+                visual: {
+                    type: 'boat',
+                    squares: [ {r:3, c:1}, {r:3, c:2}, {r:3, c:3}, {r:3, c:4}, {r:2, c:2}, {r:2, c:3} ],
+                    triangles: [ {r:3, c:0, dir:'left'}, {r:3, c:5, dir:'right'} ]
+                },
+                question: "Kasus 3: Perahu Layar Mini. Gambar kapal mainan terdiri dari 6 kotak utuh (biru) dan 2 ubin segitiga setengah kotak (merah). Berapakah LUAS total kapal tersebut?",
+                options: ["7 kotak", "8 kotak", "6 kotak", "9 kotak"],
+                correct: 0,
+                reason: "2 Segitiga Merah = 1 Kotak Utuh. Luas Total = 6 Kotak Biru + 1 Kotak = 7 Kotak."
+            },
+            // Question 4
+            {
+                type: 'grid_area',
+                visual: {
+                    type: 'house',
+                    squares: [ {r:3, c:1}, {r:3, c:2}, {r:3, c:3}, {r:3, c:4}, {r:4, c:1}, {r:4, c:2}, {r:4, c:3}, {r:4, c:4} ],
+                    triangles: [ {r:2, c:2, dir:'left'}, {r:2, c:3, dir:'right'} ]
+                },
+                question: "Kasus 4: Rumah Kucing Stadium. Terdiri dari 8 kotak utuh (biru) dan 2 ubin segitiga setengah kotak (merah). Berapakah LUAS total rumah tersebut?",
+                options: ["10 kotak", "9 kotak", "8 kotak", "11 kotak"],
+                correct: 1,
+                reason: "2 Segitiga Merah = 1 Kotak Utuh. Luas Total = 8 Kotak Biru + 1 Kotak = 9 Kotak."
+            },
+            // Question 5
+            {
+                type: 'grid_area',
+                visual: {
+                    type: 'butterfly',
+                    squares: [ {r:2, c:2}, {r:2, c:3}, {r:3, c:2}, {r:3, c:3} ],
+                    triangles: [ {r:1, c:1, dir:'left'}, {r:1, c:4, dir:'right'}, {r:4, c:1, dir:'left'}, {r:4, c:4, dir:'right'} ]
+                },
+                question: "Kasus 5: Logo Kupu-Kupu Futsal. Terdiri dari 4 kotak utuh (biru) dan 4 ubin segitiga setengah kotak (merah). Berapakah LUAS total logo kupu-kupu tersebut?",
+                options: ["5 kotak", "7 kotak", "6 kotak", "8 kotak"],
+                correct: 2,
+                reason: "4 Segitiga Merah = 2 Kotak Utuh. Luas Total = 4 Kotak Biru + 2 Kotak = 6 Kotak."
+            },
+            // Question 6
+            {
+                type: 'grid_area',
+                visual: {
+                    type: 'rocket',
+                    squares: [ {r:2, c:2}, {r:2, c:3}, {r:3, c:2}, {r:3, c:3}, {r:4, c:2}, {r:4, c:3}, {r:5, c:2} ],
+                    triangles: [ {r:1, c:2, dir:'left'}, {r:1, c:3, dir:'right'}, {r:4, c:1, dir:'left'}, {r:4, c:4, dir:'right'} ]
+                },
+                question: "Kasus 6: Roket Pembawa Bola. Terdiri dari 7 kotak utuh (biru) dan 4 ubin segitiga setengah kotak (merah). Berapakah LUAS total roket tersebut?",
+                options: ["9 kotak", "11 kotak", "10 kotak", "8 kotak"],
+                correct: 0,
+                reason: "4 Segitiga Merah = 2 Kotak Utuh. Luas Total = 7 Kotak Biru + 2 Kotak = 9 Kotak."
+            },
+            // Question 7
+            {
+                type: 'grid_area',
+                visual: {
+                    type: 'goal',
+                    squares: [ {r:2, c:1}, {r:2, c:2}, {r:2, c:3}, {r:2, c:4}, {r:3, c:2} ],
+                    triangles: [ {r:3, c:1, dir:'left'}, {r:3, c:3, dir:'right'} ]
+                },
+                question: "Kasus 7: Logo Tiang Gawang. Terdiri dari 5 kotak utuh (biru) dan 2 ubin segitiga setengah kotak (merah). Berapakah LUAS total gambar gawang tersebut?",
+                options: ["7 kotak", "6 kotak", "5 kotak", "8 kotak"],
+                correct: 1,
+                reason: "2 Segitiga Merah = 1 Kotak Utuh. Luas Total = 5 Kotak Biru + 1 Kotak = 6 Kotak."
+            },
+            // Question 8
+            {
+                type: 'grid_area',
+                visual: {
+                    type: 'sword',
+                    squares: [ {r:1, c:2}, {r:2, c:2}, {r:3, c:2}, {r:4, c:2}, {r:4, c:1}, {r:4, c:3} ],
+                    triangles: [ {r:5, c:2, dir:'left'}, {r:0, c:2, dir:'right'} ]
+                },
+                question: "Kasus 8: Pedang Kesatria Stadium. Terdiri dari 6 kotak utuh (biru) dan 2 ubin segitiga setengah kotak (merah). Berapakah LUAS total pedang tersebut?",
+                options: ["7 kotak", "8 kotak", "6 kotak", "9 kotak"],
+                correct: 0,
+                reason: "2 Segitiga Merah = 1 Kotak Utuh. Luas Total = 6 Kotak Biru + 1 Kotak = 7 Kotak."
+            },
+            // Question 9
+            {
+                type: 'grid_area',
+                visual: {
+                    type: 'hat',
+                    squares: [ {r:3, c:1}, {r:3, c:2}, {r:3, c:3} ],
+                    triangles: [ {r:2, c:1, dir:'left'}, {r:2, c:2, dir:'right'}, {r:2, c:3, dir:'left'}, {r:4, c:2, dir:'right'} ]
+                },
+                question: "Kasus 9: Topi Coach Sepak Bola. Terdiri dari 3 kotak utuh (biru) dan 4 ubin segitiga setengah kotak (merah). Berapakah LUAS total gambar topi tersebut?",
+                options: ["6 kotak", "5 kotak", "4 kotak", "7 kotak"],
+                correct: 1,
+                reason: "4 Segitiga Merah = 2 Kotak Utuh. Luas Total = 3 Kotak Biru + 2 Kotak = 5 Kotak."
+            },
+            // Question 10
+            {
+                type: 'grid_area',
+                visual: {
+                    type: 'castle',
+                    squares: [ {r:2, c:1}, {r:2, c:3}, {r:2, c:5}, {r:3, c:1}, {r:3, c:2}, {r:3, c:3}, {r:3, c:4}, {r:3, c:5}, {r:4, c:2}, {r:4, c:4} ],
+                    triangles: [ {r:1, c:1, dir:'left'}, {r:1, c:3, dir:'right'}, {r:1, c:5, dir:'left'}, {r:5, c:3, dir:'right'} ]
+                },
+                question: "Kasus 10: Benteng Pertahanan. Terdiri dari 10 kotak utuh (biru) dan 4 ubin segitiga setengah kotak (merah). Berapakah LUAS total kastil tersebut?",
+                options: ["14 kotak", "12 kotak", "11 kotak", "13 kotak"],
+                correct: 1,
+                reason: "4 Segitiga Merah = 2 Kotak Utuh. Luas Total = 10 Kotak Biru + 2 Kotak = 12 Kotak."
+            },
+
+            // 11-15: 5 Irregular shapes perimeter
+            {
+                type: 'irregular_perimeter',
+                shape: 'L-shape',
+                dims: { left: "8 m", bottom: "8 m", top: "5 m", innerV: "5 m", innerH: "3 m", right: "3 m" },
+                question: "Siswa kelas 3 SD berbaris membentuk pola L-Shape untuk parade olahraga. Ukuran sisi-sisi luar barisan adalah: 8 meter, 8 meter, 5 meter, 5 meter, 3 meter, dan 3 meter. Berapakah KELILING total barisan mereka?",
+                options: ["24 meter", "32 meter", "28 meter", "36 meter"],
+                correct: 1,
+                reason: "Keliling = Jumlah semua sisi luar = 8 + 8 + 3 + 3 + 5 + 5 = 32 meter."
+            },
+            {
+                type: 'irregular_perimeter',
+                shape: 'U-shape',
+                dims: { left: "6 m", bottom: "8 m", right: "6 m", innerL: "4 m", innerB: "4 m", innerR: "4 m" },
+                question: "Lorong Masuk Ganti Pemain berbentuk U-Shape. Sisi-sisi luarnya adalah: 6m, 8m, 6m, 4m, 4m, dan 4m. Berapakah KELILING total lorong ganti tersebut?",
+                options: ["28 meter", "30 meter", "32 meter", "36 meter"],
+                correct: 2,
+                reason: "Keliling = Jumlah semua sisi luar = 6 + 8 + 6 + 4 + 4 + 4 = 32 meter."
+            },
+            {
+                type: 'irregular_perimeter',
+                shape: 'T-shape',
+                dims: { top: "10 m", leftWing: "3 m", vertL: "5 m", bottom: "4 m", vertR: "5 m", rightWing: "3 m" },
+                question: "Sebuah papan skor raksasa berbentuk huruf T memiliki panjang tepi: 10m, 3m, 5m, 4m, 5m, dan 3m. Berapakah KELILING papan skor tersebut?",
+                options: ["30 meter", "28 meter", "32 meter", "26 meter"],
+                correct: 0,
+                reason: "Keliling = Jumlah semua sisi luar = 10 + 3 + 5 + 4 + 5 + 3 = 30 meter."
+            },
+            {
+                type: 'irregular_perimeter',
+                shape: 'L-inverse',
+                dims: { left: "7 m", top: "7 m", right: "4 m", innerH: "3 m", innerV: "3 m", bottom: "4 m" },
+                question: "Kolam terapi atlet cedera berbentuk L Terbalik. Tepi kolam memiliki ukuran: 7m, 7m, 4m, 3m, 3m, dan 4m. Berapakah KELILING kolam terapi tersebut?",
+                options: ["24 meter", "28 meter", "30 meter", "26 meter"],
+                correct: 1,
+                reason: "Keliling = Jumlah semua sisi luar = 7 + 7 + 4 + 3 + 3 + 4 = 28 meter."
+            },
+            {
+                type: 'irregular_perimeter',
+                shape: 'plus-shape',
+                dims: { size: "3 m" },
+                question: "Sebuah monumen bola emas berbentuk tanda tambah (+) memiliki 12 sisi luar yang masing-masing panjangnya 3 meter. Berapakah KELILING total monumen tersebut?",
+                options: ["30 meter", "36 meter", "24 meter", "40 meter"],
+                correct: 1,
+                reason: "Keliling = 12 sisi × 3 meter = 36 meter."
+            },
+
+            // 16-30: 15 Mixed questions (Luas, Keliling, Mencari sisi yang hilang)
+            {
+                type: 'mixed',
+                category: 'keliling',
+                visual_p: 12, visual_l: 8,
+                question: "Sebuah lapangan futsal memiliki Panjang 12 meter dan Lebar 8 meter. Berapakah KELILING lapangan futsal tersebut?",
+                options: ["20 meter", "40 meter", "96 meter", "32 meter"],
+                correct: 1,
+                reason: "Keliling = 2 × (Panjang + Lebar) = 2 × (12 + 8) = 40 meter."
+            },
+            {
+                type: 'mixed',
+                category: 'luas',
+                visual_p: 10, visual_l: 6,
+                question: "Rumput karpet stadion berbentuk persegi panjang dengan ukuran 10 meter × 6 meter. Berapakah LUAS karpet rumput tersebut?",
+                options: ["32 meter persegi", "16 meter persegi", "60 meter persegi", "48 meter persegi"],
+                correct: 2,
+                reason: "Luas = Panjang × Lebar = 10 × 6 = 60 m²."
+            },
+            {
+                type: 'mixed',
+                category: 'sisi_dari_keliling',
+                visual_p: 10, visual_l: 5,
+                question: "Keliling papan taktik pelatih adalah 30 cm. Jika PANJANG papan taktik tersebut adalah 10 cm, berapakah LEBARnya?",
+                options: ["5 cm", "10 cm", "20 cm", "15 cm"],
+                correct: 0,
+                reason: "Lebar = (Keliling / 2) - Panjang = (30 / 2) - 10 = 15 - 10 = 5 cm."
+            },
+            {
+                type: 'mixed',
+                category: 'sisi_dari_luas',
+                visual_p: 8, visual_l: 6,
+                question: "Sebuah kolam renang berbentuk persegi panjang memiliki LUAS 48 m². Jika LEBAR kolam renang tersebut adalah 6 meter, berapakah PANJANGnya?",
+                options: ["12 meter", "8 meter", "7 meter", "9 meter"],
+                correct: 1,
+                reason: "Panjang = Luas / Lebar = 48 / 6 = 8 meter."
+            },
+            {
+                type: 'mixed',
+                category: 'sisi_persegi_keliling',
+                visual_p: 6, visual_l: 6,
+                question: "Papan skor berbentuk persegi memiliki KELILING sebesar 24 meter. Berapakah panjang SISI papan skor tersebut?",
+                options: ["4 meter", "8 meter", "6 meter", "12 meter"],
+                correct: 2,
+                reason: "Sisi Persegi = Keliling / 4 = 24 / 4 = 6 meter."
+            },
+            {
+                type: 'mixed',
+                category: 'sisi_persegi_luas',
+                visual_p: 9, visual_l: 9,
+                question: "Arafa menggambar kotak pasir latihan berbentuk persegi dengan LUAS 81 m². Berapakah panjang SISI kotak pasir tersebut?",
+                options: ["8 meter", "10 meter", "9 meter", "7 meter"],
+                correct: 2,
+                reason: "Sisi Persegi = Akar kuadrat dari Luas = √81 = 9 meter."
+            },
+            {
+                type: 'mixed',
+                category: 'keliling',
+                visual_p: 15, visual_l: 9,
+                question: "Berapakah keliling lapangan basket jika memiliki Panjang 15 meter dan Lebar 9 meter?",
+                options: ["24 meter", "48 meter", "135 meter", "36 meter"],
+                correct: 1,
+                reason: "Keliling = 2 × (15 + 9) = 2 × 24 = 48 meter."
+            },
+            {
+                type: 'mixed',
+                category: 'luas',
+                visual_p: 5, visual_l: 2,
+                question: "Sebuah meja lipat arsitek memiliki ukuran Panjang 5 meter dan Lebar 2 meter. Berapakah LUAS permukaan meja lipat tersebut?",
+                options: ["14 m²", "10 m²", "7 m²", "12 m²"],
+                correct: 1,
+                reason: "Luas = Panjang × Lebar = 5 × 2 = 10 m²."
+            },
+            {
+                type: 'mixed',
+                category: 'sisi_dari_keliling',
+                visual_p: 6, visual_l: 3,
+                question: "Keliling gawang futsal adalah 18 meter. Jika LEBARnya adalah 3 meter, berapakah PANJANG gawang tersebut?",
+                options: ["6 meter", "5 meter", "9 meter", "4 meter"],
+                correct: 0,
+                reason: "Panjang = (Keliling / 2) - Lebar = (18 / 2) - 3 = 9 - 3 = 6 meter."
+            },
+            {
+                type: 'mixed',
+                category: 'sisi_dari_luas',
+                visual_p: 9, visual_l: 4,
+                question: "Luas ruang ganti wasit adalah 36 m². Jika PANJANGnya adalah 9 meter, berapakah LEBAR ruang ganti tersebut?",
+                options: ["4 meter", "3 meter", "5 meter", "6 meter"],
+                correct: 0,
+                reason: "Lebar = Luas / Panjang = 36 / 9 = 4 meter."
+            },
+            {
+                type: 'mixed',
+                category: 'sisi_persegi_keliling',
+                visual_p: 10, visual_l: 10,
+                question: "Sebuah ubin lapangan berbentuk persegi memiliki KELILING sebesar 40 cm. Berapakah panjang SISI ubin tersebut?",
+                options: ["8 cm", "12 cm", "10 cm", "20 cm"],
+                correct: 2,
+                reason: "Sisi = Keliling / 4 = 40 / 4 = 10 cm."
+            },
+            {
+                type: 'mixed',
+                category: 'sisi_persegi_luas',
+                visual_p: 4, visual_l: 4,
+                question: "Ubin kamar mandi stadion berbentuk persegi dengan LUAS 16 cm². Berapakah panjang SISI ubin tersebut?",
+                options: ["3 cm", "4 cm", "5 cm", "8 cm"],
+                correct: 1,
+                reason: "Sisi = √16 = 4 cm."
+            },
+            {
+                type: 'mixed',
+                category: 'luas_dari_keliling_persegi',
+                visual_p: 7, visual_l: 7,
+                question: "Sebuah taman berbentuk persegi memiliki KELILING sebesar 28 meter. Berapakah LUAS taman tersebut?",
+                options: ["49 m²", "14 m²", "28 m²", "56 m²"],
+                correct: 0,
+                reason: "Sisi = 28 / 4 = 7 meter. Luas = 7 × 7 = 49 m²."
+            },
+            {
+                type: 'mixed',
+                category: 'sisi_dari_keliling',
+                visual_p: 15, visual_l: 10,
+                question: "Keliling lintasan lari adalah 50 meter. Jika LEBAR lintasan adalah 10 meter, berapakah PANJANG lintasan tersebut?",
+                options: ["15 meter", "20 meter", "25 meter", "30 meter"],
+                correct: 0,
+                reason: "Panjang = (Keliling / 2) - Lebar = (50 / 2) - 10 = 25 - 10 = 15 meter."
+            },
+            {
+                type: 'mixed',
+                category: 'luas',
+                visual_p: 12, visual_l: 7,
+                question: "Lapangan tenis berbentuk persegi panjang memiliki Panjang 12 meter dan Lebar 7 meter. Berapakah LUAS lapangan tenis tersebut?",
+                options: ["38 m²", "84 m²", "19 m²", "96 m²"],
+                correct: 1,
+                reason: "Luas = 12 × 7 = 84 m²."
+            }
+        ];
+
+        function initMegaQuiz() {
+            renderQuizNavigator();
+            loadQuizQuestion(state.currentQuizIndex);
+        }
+
+        function renderQuizNavigator() {
+            // Note: Navigation map row was completely removed as requested
+            const container = document.getElementById('quiz-navigator-container');
+            if (container) {
+                container.innerHTML = '';
+            }
+        }
+
+        function jumpToQuiz(index) {
+            playSynthSound('click');
+            state.currentQuizIndex = index;
+            loadQuizQuestion(index);
+        }
+
+        function loadQuizQuestion(index) {
+            const q = quizDatabase[index];
+            document.getElementById('quiz-lbl-current').innerText = index + 1;
+            document.getElementById('quiz-lbl-score').innerText = `${state.quizScore}/30`;
+            document.getElementById('quiz-question-txt').innerText = q.question;
+            document.getElementById('quiz-feedback-box').innerHTML = '';
+
+            const visualBox = document.getElementById('quiz-visualizer-box');
+            visualBox.innerHTML = '';
+
+            // Renderer 1: Grid Berpetak Kompleks (Tameng Roblox Style)
+            if (q.type === 'grid_area') {
+                const gridData = q.visual;
+                let gridHTML = `<div class="grid grid-cols-6 grid-rows-6 gap-1 w-32 h-32 bg-slate-100 p-1 rounded-lg border-2 border-slate-300 relative shadow-inner">`;
+                
+                for (let r = 0; r < 6; r++) {
+                    for (let c = 0; c < 6; c++) {
+                        const sqMatch = gridData.squares.find(s => s.r === r && s.c === c);
+                        const triMatch = gridData.triangles.find(t => t.r === r && t.c === c);
+                        
+                        if (sqMatch) {
+                            gridHTML += `<div class="bg-blue-500 border border-white rounded-sm"></div>`;
+                        } else if (triMatch) {
+                            const points = triMatch.dir === 'left' ? '0,18 18,18 18,0' : '0,18 0,0 18,18';
+                            gridHTML += `
+                                <div class="relative bg-transparent overflow-hidden">
+                                    <svg class="absolute inset-0 w-full h-full" viewBox="0 0 18 18">
+                                        <polygon points="${points}" fill="#ef4444" stroke="#ffffff" stroke-width="1.5"/>
+                                    </svg>
+                                </div>
+                            `;
+                        } else {
+                            gridHTML += `<div class="border border-slate-200/50"></div>`;
+                        }
+                    }
+                }
+                gridHTML += `</div>`;
+                
+                visualBox.innerHTML = `
+                    <div class="flex flex-col items-center gap-2">
+                        <span class="text-[10px] font-bold text-slate-500 bg-white border px-2 py-0.5 rounded-full">Desain Kertas Berpetak (Luas)</span>
+                        ${gridHTML}
+                        <div class="flex gap-4 text-[10px] font-bold mt-1">
+                            <span class="flex items-center gap-1"><span class="w-3 h-3 bg-blue-500 rounded-sm"></span> Ubin Utuh (1)</span>
+                            <span class="flex items-center gap-1"><span class="w-3 h-3 bg-red-500 rounded-sm"></span> Setengah Ubin (0.5)</span>
+                        </div>
+                    </div>
+                `;
+            } 
+            // Renderer 2: Keliling Bentuk Tidak Beraturan
+            else if (q.type === 'irregular_perimeter') {
+                let svgContent = "";
+                const d = q.dims;
+                
+                if (q.shape === 'L-shape') {
+                    svgContent = `
+                        <polygon points="30,10 90,10 90,60 150,60 150,110 30,110" fill="#eff6ff" stroke="#3b82f6" stroke-width="3" />
+                        <text x="60" y="25" fill="#ea580c" font-size="10" font-weight="900" text-anchor="middle">${d.top}</text>
+                        <text x="105" y="45" fill="#ea580c" font-size="10" font-weight="900" text-anchor="middle">${d.innerV}</text>
+                        <text x="120" y="75" fill="#ea580c" font-size="10" font-weight="900" text-anchor="middle">${d.innerH}</text>
+                        <text x="162" y="90" fill="#ea580c" font-size="10" font-weight="900" text-anchor="middle">${d.right}</text>
+                        <text x="90" y="123" fill="#ea580c" font-size="10" font-weight="900" text-anchor="middle">${d.bottom}</text>
+                        <text x="18" y="65" fill="#ea580c" font-size="10" font-weight="900" text-anchor="middle">${d.left}</text>
+                    `;
+                } else if (q.shape === 'U-shape') {
+                    svgContent = `
+                        <polygon points="30,10 65,10 65,70 115,70 115,10 150,10 150,110 30,110" fill="#eff6ff" stroke="#3b82f6" stroke-width="3" />
+                        <text x="47" y="25" fill="#ea580c" font-size="9" font-weight="900" text-anchor="middle">${d.left}</text>
+                        <text x="75" y="40" fill="#ea580c" font-size="9" font-weight="900" text-anchor="middle">${d.innerL}</text>
+                        <text x="90" y="83" fill="#ea580c" font-size="9" font-weight="900" text-anchor="middle">${d.innerB}</text>
+                        <text x="105" y="40" fill="#ea580c" font-size="9" font-weight="900" text-anchor="middle">${d.innerR}</text>
+                        <text x="132" y="25" fill="#ea580c" font-size="9" font-weight="900" text-anchor="middle">${d.right}</text>
+                        <text x="160" y="65" fill="#ea580c" font-size="9" font-weight="900" text-anchor="middle">${d.right}</text>
+                        <text x="90" y="123" fill="#ea580c" font-size="9" font-weight="900" text-anchor="middle">${d.bottom}</text>
+                    `;
+                } else if (q.shape === 'T-shape') {
+                    svgContent = `
+                        <polygon points="30,10 150,10 150,45 105,45 105,110 75,110 75,45 30,45" fill="#eff6ff" stroke="#3b82f6" stroke-width="3" />
+                        <text x="90" y="25" fill="#ea580c" font-size="10" font-weight="900" text-anchor="middle">${d.top}</text>
+                        <text x="162" y="32" fill="#ea580c" font-size="10" font-weight="900" text-anchor="middle">${d.rightWing}</text>
+                        <text x="123" y="75" fill="#ea580c" font-size="10" font-weight="900" text-anchor="middle">${d.vertR}</text>
+                        <text x="90" y="123" fill="#ea580c" font-size="10" font-weight="900" text-anchor="middle">${d.bottom}</text>
+                        <text x="57" y="75" fill="#ea580c" font-size="10" font-weight="900" text-anchor="middle">${d.vertL}</text>
+                        <text x="18" y="32" fill="#ea580c" font-size="10" font-weight="900" text-anchor="middle">${d.leftWing}</text>
+                    `;
+                } else if (q.shape === 'L-inverse') {
+                    svgContent = `
+                        <polygon points="30,10 150,10 150,55 90,55 90,110 30,110" fill="#eff6ff" stroke="#3b82f6" stroke-width="3" />
+                        <text x="90" y="25" fill="#ea580c" font-size="10" font-weight="900" text-anchor="middle">${d.top}</text>
+                        <text x="162" y="35" fill="#ea580c" font-size="10" font-weight="900" text-anchor="middle">${d.right}</text>
+                        <text x="120" y="70" fill="#ea580c" font-size="10" font-weight="900" text-anchor="middle">${d.innerH}</text>
+                        <text x="102" y="90" fill="#ea580c" font-size="10" font-weight="900" text-anchor="middle">${d.innerV}</text>
+                        <text x="60" y="123" fill="#ea580c" font-size="10" font-weight="900" text-anchor="middle">${d.bottom}</text>
+                        <text x="18" y="65" fill="#ea580c" font-size="10" font-weight="900" text-anchor="middle">${d.left}</text>
+                    `;
+                } else if (q.shape === 'plus-shape') {
+                    svgContent = `
+                        <polygon points="65,10 115,10 115,45 150,45 150,75 115,75 115,110 65,110 65,75 30,75 30,45 65,45" fill="#eff6ff" stroke="#3b82f6" stroke-width="3" />
+                        <text x="90" y="25" fill="#ea580c" font-size="10" font-weight="900" text-anchor="middle">${d.size}</text>
+                        <text x="132" y="38" fill="#ea580c" font-size="10" font-weight="900" text-anchor="middle">${d.size}</text>
+                        <text x="162" y="65" fill="#ea580c" font-size="10" font-weight="900" text-anchor="middle">${d.size}</text>
+                        <text x="90" y="123" fill="#ea580c" font-size="10" font-weight="900" text-anchor="middle">12 Sisi Sama Panjang</text>
+                    `;
+                }
+
+                visualBox.innerHTML = `
+                    <div class="flex flex-col items-center gap-1 w-full">
+                        <span class="text-[10px] font-bold text-blue-700 bg-white border px-2 py-0.5 rounded-full">Denah Cetak Biru (Keliling)</span>
+                        <svg width="180" height="130" class="drop-shadow">
+                            ${svgContent}
+                        </svg>
+                    </div>
+                `;
+            }
+            // Renderer 3: Mixed (Keliling, Luas, Mencari Sisi)
+            else if (q.type === 'mixed') {
+                const p = q.visual_p;
+                const l = q.visual_l;
+                let mathLabel = "Persegi Panjang";
+                if (p === l) mathLabel = "Persegi";
+                
+                visualBox.innerHTML = `
+                    <div class="flex flex-col items-center gap-1">
+                        <span class="text-[10px] font-bold text-indigo-700 bg-white border px-2 py-0.5 rounded-full">${mathLabel}</span>
+                        <svg width="180" height="110" viewBox="0 0 180 110" class="drop-shadow-md rounded-xl">
+                            <rect x="10" y="10" width="160" height="90" rx="8" fill="#1e3a8a" fill-opacity="0.1" stroke="#1e3a8a" stroke-width="2.5"/>
+                            <text x="90" y="60" fill="#1e293b" font-size="11" font-weight="900" text-anchor="middle">?</text>
+                            <text x="90" y="102" fill="#475569" font-size="9" font-weight="bold" text-anchor="middle">Sisi Atas/Bawah</text>
+                        </svg>
+                    </div>
+                `;
+            }
+
+            // Generate answer choice buttons
+            const choicesContainer = document.getElementById('quiz-choices-container');
+            choicesContainer.innerHTML = '';
+
+            for (let c = 0; c < 4; c++) {
+                const isAnswered = (state.quizStates[index] !== null);
+                let btnStyle = "bg-white hover:bg-emerald-50 border-gray-200 hover:border-emerald-400 text-slate-700";
+
+                if (isAnswered) {
+                    if (c === q.correct) {
+                        btnStyle = "bg-emerald-500 border-emerald-600 text-white font-black shadow-md scale-[1.02]";
+                    } else if (state.quizAnswers[index] === c) {
+                        btnStyle = "bg-rose-400 border-rose-500 text-white font-bold";
+                    } else {
+                        btnStyle = "bg-gray-50 border-gray-100 text-gray-300 pointer-events-none";
+                    }
+                }
+
+                choicesContainer.innerHTML += `
+                    <button onclick="selectQuizChoice(${c})" class="py-3 px-4 border-2 font-bold text-xs rounded-xl transition shadow-sm active:scale-95 text-left flex items-center gap-2 ${btnStyle}">
+                        <span class="w-6 h-6 bg-slate-100 text-slate-700 rounded-full flex items-center justify-center text-[10px] font-black">${String.fromCharCode(65 + c)}</span>
+                        <span>${q.options[c]}</span>
+                    </button>
+                `;
+            }
+        }
+
+        function selectQuizChoice(choiceIndex) {
+            const index = state.currentQuizIndex;
+            if (state.quizStates[index] !== null) return;
+
+            const q = quizDatabase[index];
+            state.quizAnswers[index] = choiceIndex;
+
+            const feedback = document.getElementById('quiz-feedback-box');
+
+            if (choiceIndex === q.correct) {
+                playSynthSound('correct');
+                state.quizStates[index] = true;
+                state.quizScore++;
+                feedback.innerHTML = `<span class="text-emerald-600 pop-effect">⚽ GOOOL! Benar sekali! ${q.reason}</span>`;
+                state.points += 10;
+            } else {
+                playSynthSound('buzz');
+                state.quizStates[index] = false;
+                feedback.innerHTML = `<span class="text-rose-500">${q.reason}</span>`;
+            }
+
+            document.getElementById('header-points').innerText = state.points;
+            document.getElementById('quiz-lbl-score').innerText = `${state.quizScore}/30`;
+            loadQuizQuestion(index);
+
+            // Wait 2.2 seconds before loading the next question
+            setTimeout(() => {
+                if (index < 29) {
+                    jumpToQuiz(index + 1);
+                } else {
+                    document.getElementById('quiz-end-summary').classList.remove('hidden');
+                    document.getElementById('quiz-end-score').innerText = `${state.quizScore} dari 30`;
+                }
+            }, 2200);
+        }
+
+        function checkReflectionAnswer(isCorrect) {
+            const feedback = document.getElementById('reflection-feedback');
+            if (isCorrect) {
+                playSynthSound('cheer');
+                feedback.innerHTML = `<span class="text-emerald-600 pop-effect">🎉 Hebat Arafa! Betul sekali, pagar pengaman dipasang di SEKELILING luar, jadi hitung Keliling!</span>`;
+            } else {
+                playSynthSound('buzz');
+                feedback.innerHTML = `<span class="text-rose-500">Coba ingat lagi, kalau pagar di garis luar, itu Keliling atau Luas ya? Yuk coba lagi!</span>`;
+            }
+        }
+
+        window.onload = function() {
+            // Force starting index to 0
+            state.currentQuizIndex = 0;
+            changeStep(1);
+        };
+    </script>
+</body>
+</html>
